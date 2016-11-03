@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.library.app.category.model.Category;
 import com.library.app.commontests.BaseUTest;
+import com.library.app.commontests.util.DBCommand;
 
 public class CategoryRepositoryUTest extends BaseUTest {
 
@@ -23,19 +24,14 @@ public class CategoryRepositoryUTest extends BaseUTest {
 	@Test
 	public void addCategoryAndFindIt() {
 
-		Long categoryAddedId = null;
+		final Long categoryAddedId = dbCommandTransactionalExecutor.executeCommand(new DBCommand<Long>() {
 
-		try {
-			em.getTransaction().begin();
-			categoryAddedId = categoryRepository.add(createSimpleCategory()).getId();
-			assertThat(categoryAddedId, is(notNullValue()));
-			em.getTransaction().commit();
-			em.clear();
-		} catch (final Exception e) {
-			fail("This exception should not have been thrown");
-			e.printStackTrace();
-			em.getTransaction().rollback();
-		}
+			@Override
+			public Long execute() {
+				return categoryRepository.add(createSimpleCategory()).getId();
+			}
+
+		});
 
 		final Category categoryFindded = categoryRepository.findById(categoryAddedId);
 		assertThat(categoryFindded, is(notNullValue()));
