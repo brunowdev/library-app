@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.library.app.category.model.Category;
 import com.library.app.commontests.BaseUTest;
-import com.library.app.commontests.util.DBCommand;
 
 public class CategoryRepositoryUTest extends BaseUTest {
 
@@ -24,13 +23,8 @@ public class CategoryRepositoryUTest extends BaseUTest {
 	@Test
 	public void addCategoryAndFindIt() {
 
-		final Long categoryAddedId = dbCommandTransactionalExecutor.executeCommand(new DBCommand<Long>() {
-
-			@Override
-			public Long execute() {
-				return categoryRepository.add(createSimpleCategory()).getId();
-			}
-
+		final Long categoryAddedId = dbCommandTransactionalExecutor.executeCommand(() -> {
+			return categoryRepository.add(createSimpleCategory()).getId();
 		});
 
 		final Category categoryFindded = categoryRepository.findById(categoryAddedId);
