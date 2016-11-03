@@ -1,4 +1,4 @@
-package com.library.app.category.common;
+package com.library.app.common;
 
 import com.google.common.reflect.TypeToken;
 
