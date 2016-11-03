@@ -1,41 +1,45 @@
 package com.library.app.category.repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import static com.library.app.commontests.category.CategoryForTestsRepository.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-public class CategoryRepositoryUTest {
+import com.library.app.category.model.Category;
+import com.library.app.commontests.BaseUTest;
 
-	private EntityManagerFactory emf;
-	private EntityManager em;
+public class CategoryRepositoryUTest extends BaseUTest {
 
-	@Test
-	public void initTestCase() {
-		emf = Persistence.createEntityManagerFactory("libraryPU");
-		em = emf.createEntityManager();
-	}
+	private static CategoryRepository categoryRepository;
 
-	@After
-	public void closeEntityManager() {
-		em.close();
-		emf.close();
+	@Before
+	public void initializeObjects() {
+		categoryRepository = new CategoryRepository();
+		categoryRepository.injectEntityManager(em);
 	}
 
 	@Test
 	public void addCategoryAndFindIt() {
 
+		Long categoryAddedId = null;
+
 		try {
 			em.getTransaction().begin();
+			categoryAddedId = categoryRepository.add(createSimpleCategory()).getId();
+			assertThat(categoryAddedId, is(notNullValue()));
 			em.getTransaction().commit();
-
 			em.clear();
 		} catch (final Exception e) {
+			fail("This exception should not have been thrown");
 			e.printStackTrace();
 			em.getTransaction().rollback();
 		}
+
+		final Category categoryFindded = categoryRepository.findById(categoryAddedId);
+		assertThat(categoryFindded, is(notNullValue()));
+		assertThat(categoryFindded.getName(), is(equalTo(createSimpleCategory().getName())));
 
 	}
 
