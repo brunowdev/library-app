@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Validation;
 import javax.validation.Validator;
 
@@ -12,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.library.app.category.exceptions.CategoryExistentException;
+import com.library.app.category.exceptions.CategoryNotFoundException;
 import com.library.app.category.model.Category;
 import com.library.app.category.repository.CategoryRepository;
 import com.library.app.category.services.CategoryService;
@@ -72,7 +76,7 @@ public class CategoryServiceUTest {
 		final Category category = createRandomCategory();
 
 		when(categoryRepository.alreadyExists(category)).thenReturn(false);
-		when(categoryRepository.add(category)).thenReturn(categoryWithId(category, 10L));
+		when(categoryRepository.add(category)).thenReturn(randomCategory(category, 10L));
 
 		final Category persisted = categoryService.add(category);
 		assertThat(category.getId(), is(equalTo(persisted.getId())));
@@ -87,6 +91,73 @@ public class CategoryServiceUTest {
 			assertThat(fieldNotValidException.getFieldName(), is(equalTo("name")));
 		}
 
+	}
+
+	@Test
+	public void updateWithNullName() {
+		updateCategoryWithInvalidName(null);
+	}
+
+	@Test
+	public void updateCategoryWithShortName() {
+		updateCategoryWithInvalidName("A");
+	}
+
+	@Test
+	public void updateCategoryWithLongName() {
+		updateCategoryWithInvalidName(
+				"This is a long name that will cause an exception to be thrown This is a long name that will cause an exception to be thrown This is a long name that will cause an exception to be thrown");
+	}
+
+	@Test(expected = CategoryExistentException.class)
+	public void updateCategoryWithExistentName() {
+
+		final Category randomCategory = createRandomCategory();
+
+		when(categoryRepository.alreadyExists(randomCategory(randomCategory, 1L))).thenReturn(true);
+
+		categoryService.update(randomCategory(randomCategory, 1L));
+	}
+
+	@Test(expected = CategoryNotFoundException.class)
+	public void updateCategoryNotFound() {
+
+		final Category randomCategory = createRandomCategory();
+
+		when(categoryRepository.alreadyExists(randomCategory(randomCategory, 1L))).thenReturn(false);
+		when(categoryRepository.existsById(1L)).thenReturn(false);
+
+		categoryService.update(randomCategory(randomCategory, 1L));
+	}
+
+	@Test
+	public void updateValidCategory() {
+
+		final Category randomCategory = createRandomCategory();
+
+		when(categoryRepository.alreadyExists(randomCategory(randomCategory, 1L))).thenReturn(false);
+		when(categoryRepository.existsById(1L)).thenReturn(true);
+
+		categoryService.update(randomCategory(randomCategory, 1L));
+
+		verify(categoryRepository).update(randomCategory(randomCategory, 1L));
+	}
+
+	@Test
+	public void findAllNoCategories() {
+		when(categoryRepository.findAll()).thenReturn(new ArrayList<>());
+
+		final List<Category> categories = categoryService.findAll();
+		assertThat(categories.isEmpty(), is(equalTo(true)));
+	}
+
+	private void updateCategoryWithInvalidName(final String name) {
+		try {
+			categoryService.update(new Category(name));
+			fail("An error should have been thrown");
+		} catch (final FieldNotValidException e) {
+			assertThat(e.getFieldName(), is(equalTo("name")));
+		}
 	}
 
 }
