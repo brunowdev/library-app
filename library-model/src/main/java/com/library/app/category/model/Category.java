@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,6 +30,7 @@ public class Category implements Serializable {
 	private Long id;
 
 	@NotEmpty(message = "The name of the category is required.")
+	@Size(min = 2, max = 75)
 	@Column(unique = true, length = 75)
 	private String name;
 

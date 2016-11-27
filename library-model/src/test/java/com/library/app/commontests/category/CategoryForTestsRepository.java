@@ -17,4 +17,9 @@ public class CategoryForTestsRepository {
 		return new Category(UUID.randomUUID().toString());
 	}
 
+	public static Category categoryWithId(Category category, Long id) {
+		category.setId(id);
+		return category;
+	}
+
 }
