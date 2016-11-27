@@ -1,5 +1,7 @@
 package com.library.app.commontests;
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,9 +28,8 @@ public class BaseUTest {
 
 	@AfterClass
 	public static void closeEntityManager() {
-		em.close();
-		emf.close();
-
+		Optional.of(em).get().close();
+		Optional.of(emf).get().close();
 	}
 
 }
