@@ -5,9 +5,10 @@
 	<parent>
 		<groupId>com.library</groupId>
 		<artifactId>library-app</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.1</version>
 	</parent>
-	<artifactId>library-model</artifactId>
+
+	<artifactId>library-resource</artifactId>
 
 	<build>
 		<plugins>
