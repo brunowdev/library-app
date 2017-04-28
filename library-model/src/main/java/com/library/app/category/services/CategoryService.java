@@ -12,6 +12,6 @@ public interface CategoryService {
 
 	void update(Category category) throws FieldNotValidException;
 
-	public List<Category> findAll();
+	List<Category> findAll();
 
 }
