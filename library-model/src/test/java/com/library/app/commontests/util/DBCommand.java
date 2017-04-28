@@ -5,6 +5,6 @@ import org.junit.Ignore;
 @Ignore
 public interface DBCommand<T> {
 
-	public T execute();
+	T execute();
 
 }
