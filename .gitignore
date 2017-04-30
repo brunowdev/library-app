@@ -26,3 +26,11 @@ hs_err_pid*
 
 # Maven compiled files and test reports
 */target/
+/library-model/target/generated-test-sources/
+/library-model/target/test-classes/
+/library-model/target/library-model-0.0.1.jar
+/library-model/target/maven-archiver/
+/library-model/target/
+/library-model/target/generated-sources/
+/library-model/target/maven-status/
+/library-model/target/classes/
