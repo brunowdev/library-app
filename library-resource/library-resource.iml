@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="jdk" jdkName="9-ea" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="JDK8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="library-model" />
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.0.0.Alpha2" level="project" />
