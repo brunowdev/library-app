@@ -1,0 +1,11 @@
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\category\services\CategoryService.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\category\repository\CategoryRepository.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\common\InnerClassHandler.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\category\model\Category.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\category\exceptions\CategoryExistentException.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\common\exceptions\FieldNotValidException.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\common\constants\PersistenceConstants.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\utils\KeepBasePackage.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\category\services\impl\CategoryServiceImpl.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\category\exceptions\CategoryNotFoundException.java
+E:\scm\libraryapp\library-app\library-model\src\main\java\com\library\app\common\BaseRepository.java

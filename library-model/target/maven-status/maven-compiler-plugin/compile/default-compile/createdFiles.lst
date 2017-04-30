@@ -1,0 +1,12 @@
+com\library\app\category\services\CategoryService.class
+com\library\app\common\InnerClassHandler$1.class
+com\library\app\common\InnerClassHandler.class
+com\library\app\common\BaseRepository.class
+com\library\app\utils\KeepBasePackage.class
+com\library\app\category\model\Category.class
+com\library\app\common\exceptions\FieldNotValidException.class
+com\library\app\category\exceptions\CategoryExistentException.class
+com\library\app\category\repository\CategoryRepository.class
+com\library\app\category\services\impl\CategoryServiceImpl.class
+com\library\app\common\constants\PersistenceConstants.class
+com\library\app\category\exceptions\CategoryNotFoundException.class
