@@ -4,6 +4,7 @@
 # Log file
 *.log
 
+# IntelliJ configuration
 .idea/
 
 # BlueJ files
