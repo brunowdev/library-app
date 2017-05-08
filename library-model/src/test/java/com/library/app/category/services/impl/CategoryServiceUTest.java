@@ -144,6 +144,22 @@ public class CategoryServiceUTest {
 	}
 
 	@Test
+	public void findCategoryById() {
+
+		final Category randomCategory = createRandomCategory();
+
+		when(categoryRepository.findById(1L)).thenReturn(randomCategory);
+
+		Category find = categoryRepository.findById(1L);
+
+		assertThat(find.getId(), is(equalTo(randomCategory.getId())));
+		assertThat(find.getName(), is(equalTo(randomCategory.getName())));
+
+	}
+
+
+
+	@Test
 	public void findAllNoCategories() {
 		when(categoryRepository.findAll()).thenReturn(new ArrayList<>());
 
