@@ -162,8 +162,7 @@ public class CategoryServiceUTest {
 
 		when(categoryRepository.findById(1L)).thenReturn(null);
 
-		categoryRepository.findById(1L);
-
+		categoryService.findById(1L);
 	}
 
 	@Test
