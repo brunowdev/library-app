@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Validation;
@@ -171,6 +172,24 @@ public class CategoryServiceUTest {
 
 		final List<Category> categories = categoryService.findAll();
 		assertThat(categories.isEmpty(), is(equalTo(true)));
+	}
+
+	@Test
+	public void findAllCategories() {
+
+		final List<Category> categories = new ArrayList<>(2);
+
+		categories.addAll(Arrays.asList(createRandomCategory(), createRandomCategory()));
+
+		when(categoryRepository.findAll()).thenReturn(categories);
+
+		final List<Category> findCategories = categoryService.findAll();
+
+		assertThat(findCategories.isEmpty(), is(equalTo(false)));
+		assertThat(findCategories.size(), is(equalTo(2)));
+		assertThat(findCategories.get(0).getName(), is(equalTo(categories.get(0).getName())));
+		assertThat(findCategories.get(1).getName(), is(equalTo(categories.get(1).getName())));
+
 	}
 
 	private void updateCategoryWithInvalidName(final String name) {
