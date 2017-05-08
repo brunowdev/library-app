@@ -157,7 +157,14 @@ public class CategoryServiceUTest {
 
 	}
 
+	@Test(expected = CategoryNotFoundException.class)
+	public void findCategoryByIdNotFound() {
 
+		when(categoryRepository.findById(1L)).thenReturn(null);
+
+		categoryRepository.findById(1L);
+
+	}
 
 	@Test
 	public void findAllNoCategories() {
