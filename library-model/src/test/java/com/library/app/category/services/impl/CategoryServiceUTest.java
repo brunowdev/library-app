@@ -167,7 +167,7 @@ public class CategoryServiceUTest {
 
 	@Test
 	public void findAllNoCategories() {
-		when(categoryRepository.findAll()).thenReturn(new ArrayList<>());
+		when(categoryRepository.findAll()).thenReturn(new ArrayList<>(0));
 
 		final List<Category> categories = categoryService.findAll();
 		assertThat(categories.isEmpty(), is(equalTo(true)));
