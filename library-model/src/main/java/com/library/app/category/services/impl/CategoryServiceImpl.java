@@ -56,6 +56,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private void validateCategory(Category category) {
+        validateCategoryFields(category);
+
+        if (categoryRepository.alreadyExists(category)) {
+            throw new CategoryExistentException();
+        }
+    }
+
+    private void validateCategoryFields(Category category) {
         final Set<ConstraintViolation<Category>> errors = validator.validate(category);
 
         final Iterator<ConstraintViolation<Category>> errorsIterator = errors.iterator();
@@ -63,10 +71,6 @@ public class CategoryServiceImpl implements CategoryService {
         if (errorsIterator.hasNext()) {
             final ConstraintViolation<Category> violation = errorsIterator.next();
             throw new FieldNotValidException(violation.getPropertyPath().toString(), violation.getMessage());
-        }
-
-        if (categoryRepository.alreadyExists(category)) {
-            throw new CategoryExistentException();
         }
     }
 
