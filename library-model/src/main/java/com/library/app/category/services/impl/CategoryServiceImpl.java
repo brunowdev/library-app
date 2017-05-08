@@ -21,18 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category add(Category category) throws FieldNotValidException {
 
-        final Set<ConstraintViolation<Category>> errors = validator.validate(category);
-
-        final Iterator<ConstraintViolation<Category>> itErros = errors.iterator();
-
-        if (itErros.hasNext()) {
-            final ConstraintViolation<Category> violation = itErros.next();
-            throw new FieldNotValidException(violation.getPropertyPath().toString(), violation.getMessage());
-        }
-
-        if (categoryRepository.alreadyExists(category)) {
-            throw new CategoryExistentException();
-        }
+        validateCategory(category);
 
         return categoryRepository.add(category);
     }
@@ -40,18 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void update(Category category) throws FieldNotValidException {
 
-        final Set<ConstraintViolation<Category>> errors = validator.validate(category);
-
-        final Iterator<ConstraintViolation<Category>> errorsIterator = errors.iterator();
-
-        if (errorsIterator.hasNext()) {
-            final ConstraintViolation<Category> violation = errorsIterator.next();
-            throw new FieldNotValidException(violation.getPropertyPath().toString(), violation.getMessage());
-        }
-
-        if (categoryRepository.alreadyExists(category)) {
-            throw new CategoryExistentException();
-        }
+        validateCategory(category);
 
         if (!categoryRepository.existsById(category.getId())) {
             throw new CategoryNotFoundException();
@@ -75,6 +53,21 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    private void validateCategory(Category category) {
+        final Set<ConstraintViolation<Category>> errors = validator.validate(category);
+
+        final Iterator<ConstraintViolation<Category>> errorsIterator = errors.iterator();
+
+        if (errorsIterator.hasNext()) {
+            final ConstraintViolation<Category> violation = errorsIterator.next();
+            throw new FieldNotValidException(violation.getPropertyPath().toString(), violation.getMessage());
+        }
+
+        if (categoryRepository.alreadyExists(category)) {
+            throw new CategoryExistentException();
+        }
     }
 
 }
