@@ -13,14 +13,16 @@ import javax.ws.rs.core.Response;
 public class CategoryResource {
 
     CategoryService service;
+    CategoryJsonConverter converter;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public Response post(String body) {
         logger.debug("adding a new category with body {}", body);
 
-        Category category =
+        Category category = converter.convertFrom(body);
 
+        category = service.add(category);
         return null;
     }
 
