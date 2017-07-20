@@ -6,7 +6,7 @@ import org.junit.Ignore;
  * Created by BRUNO-PC on 20/07/2017.
  */
 @Ignore
-public class TestFileUtils {
+public final class TestFileUtils {
 
     private static final String PATH_REQUEST = "/request/";
     private static final String PATH_RESPONSE = "/response/";

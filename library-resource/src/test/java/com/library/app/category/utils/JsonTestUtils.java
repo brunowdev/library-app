@@ -20,6 +20,11 @@ public final class JsonTestUtils {
     private JsonTestUtils() {
     }
 
+    /**
+     * Lê um arquivo de teste no contexto da classe de teste que invocou.
+     * @param relativePath
+     * @return
+     */
     public static String readJsonFile(final String relativePath) {
         final InputStream is = JsonTestUtils.class.getClassLoader().getResourceAsStream(BASE_JSON_DIR + relativePath);
         try (Scanner s = new Scanner(is)) {
