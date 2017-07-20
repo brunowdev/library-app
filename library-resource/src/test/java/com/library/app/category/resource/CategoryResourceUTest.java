@@ -45,7 +45,7 @@ public class CategoryResourceUTest {
 
         when(service.add(new Category("Java EE"))).thenReturn(new Category(1L, "Java EE"));
 
-        final Response res = resource.add(readJsonFile(getPathFileRequest(PATH, "newCategory.json")));
+        final Response res = resource.post(readJsonFile(getPathFileRequest(PATH, "newCategory.json")));
 
         assertThat(res.getStatus(), is(equalTo(CREATED)));
         assertJsonMatchesExpectedJson(res.getEntity().toString(), "{\"id\":1}");
