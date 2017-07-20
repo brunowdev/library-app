@@ -18,6 +18,11 @@ public class Category implements Serializable {
         setName(name);
     }
 
+    public Category(Long id, String name) {
+        setName(name);
+        setId(id);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
