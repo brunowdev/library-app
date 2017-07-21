@@ -45,12 +45,7 @@
 			<artifactId>jsonassert</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.library</groupId>
-			<artifactId>library-model</artifactId>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
+
 	</dependencies>
 
 

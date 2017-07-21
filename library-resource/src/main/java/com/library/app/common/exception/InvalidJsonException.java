@@ -5,7 +5,7 @@ package com.library.app.common.exception;
  */
 public class InvalidJsonException extends RuntimeException {
 
-	private static final long serialVersionUID = 0b101010001111010111110110111101011111000001011101000101111001010L;
+	private static final long serialVersionUID = 0521727667537013505712L;
 
 	public InvalidJsonException(final String message) {
 		super(message);

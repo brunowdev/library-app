@@ -2,8 +2,6 @@ package com.library.app.category.resource;
 
 import com.library.app.category.model.Category;
 import com.library.app.category.services.CategoryService;
-import com.library.app.category.utils.JsonTestUtils;
-import com.library.app.category.utils.TestFileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -38,6 +36,7 @@ public class CategoryResourceUTest {
         resource = new CategoryResource();
 
         resource.service = this.service;
+        resource.converter = new CategoryJsonConverter();
     }
 
     @Test
@@ -47,7 +46,7 @@ public class CategoryResourceUTest {
 
         final Response res = resource.post(readJsonFile(getPathFileRequest(PATH, "newCategory.json")));
 
-        assertThat(res.getStatus(), is(equalTo(CREATED)));
+        assertThat(res.getStatus(), is(equalTo(CREATED.getStatusCode())));
         assertJsonMatchesExpectedJson(res.getEntity().toString(), "{\"id\":1}");
 
     }
